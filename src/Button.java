@@ -16,18 +16,30 @@ public class Button {
         this.height = height;
         this.active = false;  // buttons are inactive by default
     }
-    public void draw() {  // draws the button on the Processing canvas
-        if (active) {       // Set button appearance based on active state
-            processing.fill(100, 200, 100);  // Active
+    public void draw() {
+        // Check if the button is active
+        if (active) {
+            // If mouse is over the button, use a darker fill (150)
+            if (isMouseOver()) {
+                processing.fill(150);
+            } else {
+                // Active but not hovered, use a lighter fill (200)
+                processing.fill(200);
+            }
         } else {
-            processing.fill(200);  // Inactive 
+            // Inactive button has a red color fill
+            processing.fill(255, 51, 51);
         }
-        processing.rect(x, y, width, height);  // Draw button rectangle
-        // Set text color and alignment
-        processing.fill(0);  // Black text
+        // Draw the button rectangle with rounded corners
+        processing.rect(x, y, width, height, 5);
+        // Set text properties (black fill, font size 14)
+        processing.fill(0);
+        processing.textSize(14);
         processing.textAlign(processing.CENTER, processing.CENTER);
-        processing.text(label, x + width / 2, y + height / 2);  // Draw button label
+        // Draw the label at the center of the button
+        processing.text(label, x + width / 2, y + height / 2);
     }
+
     public String getLabel() { //return button label
         return label;
     }

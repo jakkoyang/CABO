@@ -16,13 +16,15 @@ public class Deck {
 		cardList = deck;
 	}
 	public static void setProcessing(processing.core.PApplet processing) {
-		Deck.processing = processing;
+		Deck.processing = processing; // Sets the Processing environment to be used by the Deck class
 	}
 	public BaseCard drawCard() {
 		if(isEmpty()) {
 			return null;
 		}
-		return cardList.get(cardList.size()-1);
+		BaseCard top = cardList.get(size()-1);
+		cardList.remove(size()-1);
+		return top;
 	}
 	public void addCard(BaseCard card) {
 		cardList.add(card);

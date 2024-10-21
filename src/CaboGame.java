@@ -56,6 +56,7 @@ public class CaboGame extends PApplet {
     // TODO: setProcessing for the classes which require it
     Deck.setProcessing(this);
     BaseCard.setProcessing(this);
+    Button.setProcessing(this);
     deckCheck();
     
     // TODO: set up deck and discard pile
@@ -63,9 +64,29 @@ public class CaboGame extends PApplet {
     discard = new Deck(new ArrayList<BaseCard>());
     drawnCard = null;
     // TODO: set up players array and deal their cards
-    
+    players = new Player[4];
+    players[0] = new Player("Cyntra", 0, false);
+    players[1] = new Player("Avalon", 1, true);
+    players[2] = new Player("Balthor", 1, true);
+    players[3] = new Player("Ophira", 1, true);
+    currentPlayer = 0;
+    caboPlayer = -1;
+    setGameStatus("Turn for " + players[currentPlayer].getName());
+    for(int i = 0; i < 4; i++) {
+    	for(int j = 0; j < 4; j++) {
+    		drawnCard = deck.drawCard();
+    		players[i].addCardToHand(drawnCard);
+    	}
+    }
     // TODO: set up buttons and update their states for the beginning of the game
+    buttons = new Button[5];
+    buttons[0] = new Button("Draw from Deck", 50, 700, 150, 40);
+    buttons[1] = new Button("Swap a Card", 220, 700, 150, 40);
+    buttons[2] = new Button("Declare Cabo", 390, 700, 150, 40);
+    buttons[3] = new Button("Use Action", 390 + 170, 700, 150, 40);
+    buttons[4] = new Button("End Turn", 390 + 170 + 170, 700, 150, 40);
     // TODO: update the gameMessages log: "Turn for "+currentPlayer.name
+    updateButtonStates();
   }
   
   /**
@@ -131,8 +152,27 @@ public class CaboGame extends PApplet {
    */
   public void updateButtonStates() {
     // TODO: if the current player is a computer, deactivate all buttons
+	  if(players[currentPlayer].isComputer()) {
+		  for(Button b : buttons) {
+			  b.setActive(false);
+		  }
+	  }
     // TODO: otherwise, if no card has been drawn, activate accordingly (see writeup)
+	  else if(drawnCard == null) {
+		  buttons[0].setActive(true);
+		  buttons[2].setActive(true);
+		  buttons[1].setActive(false);
+		  buttons[3].setActive(false);
+		  buttons[4].setActive(false);
+	  }
     // TODO: otherwise, if a card has been drawn, activate accordingly (see writeup)
+	  else {
+		  buttons[0].setActive(false);
+		  buttons[2].setActive(false);
+		  buttons[1].setActive(true);
+		  buttons[3].setActive(true);
+		  buttons[4].setActive(true);
+	  }
   }
   
   /**
@@ -141,15 +181,20 @@ public class CaboGame extends PApplet {
   @Override
   public void draw() {
     background(0, 128, 0);
-    
     // TODO: draw the deck and discard pile
     textSize(16);
     fill(255);
     text("Deck:", 520, 60);
     text("Discard Pile:", 644, 60);
-    
     // TODO: draw the players' hands
+    for(int i = 0; i < 4; i++) {
+    	text(players[i].getName(), 50, 45 + 150 * i);
+    	players[i].getHand().draw(60 + 150 * i);
+    }
     // TODO: draw the buttons
+    for(Button b : buttons) {
+    	b.draw();
+    }
     // TODO: show the drawn card, if there is one
     
     // TODO: if the game is over, display the game over status

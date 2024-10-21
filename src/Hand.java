@@ -39,7 +39,7 @@ public class Hand extends Deck {
 		}
 		return -1;
 	}
-	public int getRandAtIndex(int index) {
+	public int getRankAtIndex(int index) {
 		return cardList.get(index).getRank();
 	}
 	public int calcHand() {

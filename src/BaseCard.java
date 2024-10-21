@@ -27,7 +27,7 @@ public class BaseCard {
 
 	}
 	public static void setProcessing(processing.core.PApplet processing) {
-		BaseCard.processing = processing;
+		BaseCard.processing = processing; // Sets the Processing environment to be used by the BaseCard class
 	}
 	public int getRank() {
 		if(rank == 13 && suit.equals("Diamonds")) {

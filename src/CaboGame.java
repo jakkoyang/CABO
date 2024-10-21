@@ -20,7 +20,13 @@ public class CaboGame extends PApplet {
     NONE, SWAPPING, PEEKING, SPYING, SWITCHING
   }
   private ActionState actionState = ActionState.NONE;
-  
+  private Button[] buttons;
+  private int caboPlayer;
+  private int currentPlayer;
+  private boolean gameOver;
+  private Player[] players;
+  private int selectedCardFromCurrentPlayer;
+
   // provided data fields for tracking the players' moves through the game
   private ArrayList<String> gameMessages = new ArrayList<>();
   

@@ -265,9 +265,17 @@ public class CaboGame extends PApplet {
    */
   public void drawFromDeck() {
     // TODO: if the deck is empty, game over
+	  if(deck.isEmpty()) {
+		  gameOver = true;
+	  }
     // TODO: otherwise, draw the next card from the deck
+	  else {
+		  drawnCard = deck.drawCard();
+	  }
     // TODO: update the gameMessages log: player.name+" drew a card."
+	  setGameStatus(players[currentPlayer] + "drew a card.");
     // TODO: update the button states
+	  //WHAT?
   }
   
   /**
@@ -276,8 +284,11 @@ public class CaboGame extends PApplet {
    */
   public void declareCabo() {
     // TODO: update the gameMessages log: player.name+" declares CABO!"
+	  setGameStatus(players[currentPlayer].getName() + " declares CABO!");
     // TODO: set the caboPlayer to the current player's index
+	  caboPlayer = currentPlayer;
     // TODO: end this player's turn
+	  currentPlayer++; //????
   }
   
   ///////////////////////////////////// ACTION STATE HANDLERS /////////////////////////////////////

@@ -13,8 +13,8 @@ public class CaboGame extends PApplet {
    * 
    * This allows us to easily restrict the possible values of a variable.
    */
-   ArrayList<BaseCard> deck;
-   ArrayList<BaseCard> discard;
+   Deck deck;
+   Deck discard;
    BaseCard drawnCard;
   private enum ActionState {
     NONE, SWAPPING, PEEKING, SPYING, SWITCHING
@@ -53,8 +53,8 @@ public class CaboGame extends PApplet {
     deckCheck();
     
     // TODO: set up deck and discard pile
-    deck = Deck.createDeck();
-    discard = new ArrayList<BaseCard>(52);
+    deck = new Deck(Deck.createDeck());
+    discard = new Deck(new ArrayList<BaseCard>());
     drawnCard = null;
     // TODO: set up players array and deal their cards
     
@@ -137,6 +137,10 @@ public class CaboGame extends PApplet {
     background(0, 128, 0);
     
     // TODO: draw the deck and discard pile
+    textSize(16);
+    fill(255);
+    text("Deck:", 520, 60);
+    text("Discard Pile:", 644, 60);
     
     // TODO: draw the players' hands
     // TODO: draw the buttons

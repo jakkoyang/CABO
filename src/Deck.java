@@ -7,11 +7,9 @@ import processing.core.PApplet;
  * cards, including shuffling, drawing, and adding cards.
  */
 public class Deck {
-  
-  // TODO: add everything else
 	protected ArrayList<BaseCard> cardList;
 	protected static processing.core.PApplet processing;
-	Deck(ArrayList<BaseCard> deck){
+	public Deck(ArrayList<BaseCard> deck){
 		if(Deck.processing == null) {
 			throw new IllegalStateException();
 		}
@@ -21,7 +19,7 @@ public class Deck {
 		Deck.processing = processing;
 	}
 	public BaseCard drawCard() {
-		if(cardList.size() == 0) {
+		if(isEmpty()) {
 			return null;
 		}
 		return cardList.get(cardList.size()-1);
@@ -36,7 +34,14 @@ public class Deck {
 		return cardList.size() == 0;
 	}
 	public void draw(int x, int y, boolean isDiscard) {
-		
+        if (!isEmpty()) {
+            BaseCard topCard = cardList.get(cardList.size() - 1);
+            if (isDiscard) {
+                topCard.draw(x, y);  // if discard, drawing the front of the card
+            } else { //otherwise 
+                processing.image(processing.loadImage("back.png"), x, y, 50, 70); //fixed height
+            }
+        }
 	}
   
   /**

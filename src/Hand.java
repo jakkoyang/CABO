@@ -16,14 +16,20 @@ public class Hand extends Deck {
 		return old;
 	}
 	public void switchCards(int myIndex, Hand otherHand, int otherIndex) {
-		BaseCard temp; //TODO
-		
+	    BaseCard myCard = this.cardList.get(myIndex);
+	    BaseCard otherCard = otherHand.cardList.get(otherIndex);
+	    this.cardList.set(myIndex, otherCard);
+	    otherHand.cardList.set(otherIndex, myCard);
 	}
 	public void setFaceUp(int index, boolean faceUp) {
 		cardList.get(index).setFaceUp(faceUp);
 	}
 	public void draw(int y) {
-		//TODO
+	    for (int i = 0; i < cardList.size(); i++) {
+	        int x = 50 + 60 * i; //calculate x
+	        BaseCard card = cardList.get(i);
+	        card.draw(x, y);  //draw at pos
+	    }
 	}
 	public int indexOfMouseover() {
 		for(int i = 0; i <= HAND_SIZE; i++) {

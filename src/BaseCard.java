@@ -14,14 +14,14 @@ public class BaseCard {
 	private int y;
 	private static processing.core.PImage cardBack;
 	private processing.core.PImage cardImage;
-	BaseCard(int rank, String suit){
+	public BaseCard(int rank, String suit){
 		if(BaseCard.processing == null) {
 			throw new IllegalStateException();
 		}
 		this.rank = rank;
 		this.suit = suit;
 		if (BaseCard.cardBack == null) {
-		        BaseCard.cardBack = processing.loadImage("back.png"); 
+//			BaseCard.cardBack = processing.loadImage("back.png"); //Doesnt work
 		}
 	    this.cardImage = processing.loadImage("images"+File.separator+rank+"_of_"+suit.toLowerCase()+".png"); 
 

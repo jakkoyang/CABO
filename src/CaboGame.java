@@ -58,7 +58,7 @@ public class CaboGame extends PApplet {
     BaseCard.setProcessing(this);
     Button.setProcessing(this);
     deckCheck();
-    
+    this.selectedCardFromCurrentPlayer = -1;
     // TODO: set up deck and discard pile
     deck = new Deck(Deck.createDeck());
     discard = new Deck(new ArrayList<BaseCard>());
@@ -196,8 +196,24 @@ public class CaboGame extends PApplet {
     	b.draw();
     }
     // TODO: show the drawn card, if there is one
-    
+    drawnCard.draw(500, 500);
     // TODO: if the game is over, display the game over status
+ // Display game messages with different colors based on the content
+    int y = 200; // Starting y-position for messages
+    for (String message : gameMessages) {
+    textSize(16);
+    if (message.contains("CABO")) {
+    fill(255, 128, 0);
+    } else if (message.contains("switched")) {
+    fill(255, 204, 153);
+    } else if (message.contains("spied")) {
+    fill(255, 229, 204);
+    } else {
+    fill(255);
+    }
+    text(message, width - 300, y); // Adjust x-position as needed
+    y += 20; // Spacing between messages
+    }
     // TODO: handle the computer players' turns
   }
   
@@ -209,8 +225,27 @@ public class CaboGame extends PApplet {
   @Override
   public void mousePressed() {
     // TODO: if game is over or it's the computer's turn, do nothing
+	if(gameOver || currentPlayer != 0) { }
     // TODO: handle button clicks
-    
+	else if(buttons[0].isMouseOver() && this.mousePressed) {
+		drawFromDeck();
+	}
+	else if(buttons[1].isMouseOver() && this.mousePressed) {
+		actionState = ActionState.SWAPPING;
+		setGameStatus("Click a card in your hand to swap it with the drawn card");
+	}
+	else if(buttons[2].isMouseOver() && this.mousePressed) {
+		declareCabo();
+		nextTurn();
+	}
+	else if(buttons[3].isMouseOver() && this.mousePressed) {
+		if(drawnCard instanceof ActionCard) {
+			//TODO 3.5 Use Action. Help.
+		}
+	}
+	else if(buttons[4].isMouseOver() && this.mousePressed) {
+		nextTurn();
+	}
     // handle additional action states (TODO: complete these methods)
     switch (actionState) {
       case SWAPPING -> handleCardSwap();

@@ -46,7 +46,7 @@ public class Button {
     public boolean isActive() {  // returns whether the button is currently active
         return active;
     }
-    public boolean isMouseOver() {  //muse is currently over this button?
+    public boolean isMouseOver() {  //mouse is currently over this button?
         return processing.mouseX >= x && processing.mouseX <= x + width &&
                processing.mouseY >= y && processing.mouseY <= y + height;
     }

@@ -56,14 +56,6 @@ public class Deck {
     BaseCard topCard = cardList.get(cardList.size() - 1);
     topCard.setFaceUp(isDiscard);
     topCard.draw(x, y);
-    // if (!isEmpty()) {
-    // BaseCard topCard = cardList.get(cardList.size() - 1);
-    // if (isDiscard) {
-    // topCard.draw(x, y); // if discard, drawing the front of the card
-    // } else { //otherwise
-    // processing.image(processing.loadImage("back.png"), x, y, 50, 70); //fixed height
-    // }
-    // }
   }
 
   /**

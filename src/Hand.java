@@ -40,8 +40,8 @@ public class Hand extends Deck {
     }
   }
 
-  public int indexOfMouseover() {
-    for (int i = 0; i <= HAND_SIZE; i++) {
+  public int indexOfMouseOver() {
+    for (int i = 0; i < HAND_SIZE; i++) {
       if (cardList.get(i).isMouseOver()) {
         return i;
       }

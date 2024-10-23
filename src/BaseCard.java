@@ -25,12 +25,16 @@ public class BaseCard {
     }
     this.cardImage = processing
         .loadImage("images" + File.separator + rank + "_of_" + suit.toLowerCase() + ".png");
+    if (this.cardImage == null || BaseCard.cardBack == null) {
+      throw new RuntimeException();
+    }
 
   }
 
   public static void setProcessing(processing.core.PApplet processing) {
-    BaseCard.processing = processing; // Sets the Processing environment to be used by the BaseCard class
-                                     
+    BaseCard.processing = processing; // Sets the Processing environment to be used by the BaseCard
+                                      // class
+
   }
 
   public int getRank() {
